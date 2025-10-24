@@ -1166,17 +1166,17 @@ const gameReducer = (state, action) => {
 
 const Button = ({ Icon, label, onClick, variant = 'primary', className = '', children, disabled = false }) => {
   const colors = {
-    primary: 'bg-cyan-500 hover:bg-cyan-400 text-gray-900',
-    secondary: 'bg-gray-600 hover:bg-gray-500 text-white',
-    danger: 'bg-red-600 hover:bg-red-500 text-white',
-    success: 'bg-green-600 hover:bg-green-500 text-white',
+    primary: 'bg-yellow-500 hover:bg-yellow-400 text-blue-950 shadow-lg shadow-yellow-500/50 hover:shadow-yellow-400/70 border border-yellow-600',
+    secondary: 'bg-blue-600 hover:bg-blue-500 text-yellow-400 border border-blue-500 shadow-md shadow-blue-500/30',
+    danger: 'bg-red-600 hover:bg-red-500 text-white border border-red-500 shadow-md shadow-red-500/30',
+    success: 'bg-green-600 hover:bg-green-500 text-white border border-green-500 shadow-md shadow-green-500/30',
   };
-  
+
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg font-semibold transition-colors duration-200 shadow-md ${colors[variant]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`flex items-center justify-center space-x-2 px-4 py-2 rounded font-bold transition-all duration-200 ${colors[variant]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
       {Icon && <Icon className="w-5 h-5" />}
       {label && <span>{label}</span>}
@@ -1186,13 +1186,13 @@ const Button = ({ Icon, label, onClick, variant = 'primary', className = '', chi
 };
 
 const Card = ({ children, className = '' }) => (
-  <div className={`bg-gray-800 shadow-lg rounded-xl overflow-hidden ${className}`}>
+  <div className={`bg-gradient-to-br from-blue-800 to-blue-900 shadow-lg shadow-blue-900/50 rounded border-2 border-yellow-600/30 overflow-hidden ${className}`}>
     {children}
   </div>
 );
 
 const CardHeader = ({ children, className = '' }) => (
-  <div className={`bg-gray-900 px-4 py-3 border-b border-gray-700 ${className}`}>
+  <div className={`bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 px-4 py-3 border-b-2 border-yellow-600/40 ${className}`}>
     {children}
   </div>
 );
@@ -1208,10 +1208,10 @@ const Sidebar = ({ onNav, onNewGame, isExpanded, currentPage }) => {
   const NavLink = ({ Icon, label, page }) => (
     <button
       onClick={() => onNav(page)}
-      className={`flex items-center w-full p-3 rounded-lg transition-colors duration-200 ${
+      className={`flex items-center w-full p-3 rounded transition-all duration-200 border ${
         currentPage === page
-          ? 'bg-cyan-600 text-white'
-          : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+          ? 'bg-yellow-500 text-blue-950 font-bold shadow-lg shadow-yellow-500/50 border-yellow-400'
+          : 'text-blue-100 hover:bg-blue-700/50 hover:text-yellow-400 border-transparent hover:border-yellow-600/20 hover:shadow-md hover:shadow-yellow-500/20'
       } ${isExpanded ? 'justify-start space-x-3' : 'justify-center'}`}
     >
       <Icon className="w-6 h-6 shrink-0" />
@@ -1221,13 +1221,13 @@ const Sidebar = ({ onNav, onNewGame, isExpanded, currentPage }) => {
 
   return (
     <div
-      className={`flex flex-col h-screen bg-gray-900 text-white shadow-lg transition-all duration-300 ${
+      className={`flex flex-col h-screen bg-gradient-to-br from-blue-900 to-blue-800 text-white shadow-2xl shadow-blue-950 border-r-2 border-yellow-600/30 transition-all duration-300 ${
         isExpanded ? 'w-64' : 'w-20'
       }`}
     >
-      <div className={`flex items-center p-4 h-20 border-b border-gray-700 ${isExpanded ? 'justify-between' : 'justify-center'}`}>
+      <div className={`flex items-center p-4 h-20 border-b border-yellow-600/30 ${isExpanded ? 'justify-between' : 'justify-center'}`}>
         {isExpanded && (
-          <h1 className="text-2xl font-bold text-cyan-400">
+          <h1 className="text-2xl font-bold text-yellow-400">
             BlitzSim
           </h1>
         )}
@@ -1243,10 +1243,10 @@ const Sidebar = ({ onNav, onNewGame, isExpanded, currentPage }) => {
         <NavLink Icon={BookOpen} label="Team History" page="TEAM_HISTORY" />
       </nav>
       
-      <div className="p-3 border-t border-gray-700">
+      <div className="p-3 border-t border-yellow-600/30">
         <button
           onClick={onNewGame}
-          className={`flex items-center w-full p-3 rounded-lg transition-colors duration-200 text-white bg-red-600 hover:bg-red-500 ${
+          className={`flex items-center w-full p-3 rounded transition-all duration-200 text-white bg-red-600 hover:bg-red-500 border-2 border-red-500 shadow-lg shadow-red-600/50 hover:shadow-red-500/70 font-bold ${
             isExpanded ? 'justify-start space-x-3' : 'justify-center'
           }`}
         >
@@ -1259,9 +1259,9 @@ const Sidebar = ({ onNav, onNewGame, isExpanded, currentPage }) => {
 };
 
 const TopBar = ({ userTeam, season, onToggleSidebar, isExpanded }) => (
-  <header className="flex items-center justify-between h-20 bg-gray-900 text-white p-4 shadow-lg border-b border-gray-700">
+  <header className="flex items-center justify-between h-20 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white p-4 shadow-lg shadow-blue-950/50 border-b-2 border-yellow-600/40">
     <div className="flex items-center">
-      <button onClick={onToggleSidebar} className="p-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white mr-4">
+      <button onClick={onToggleSidebar} className="p-2 rounded text-blue-100 hover:bg-blue-700/50 hover:text-yellow-400 border border-transparent hover:border-yellow-600/30 mr-4 transition-all">
         {isExpanded ? <ChevronsLeft className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
       <h1 className="text-xl md:text-2xl font-bold text-white">
@@ -1269,8 +1269,8 @@ const TopBar = ({ userTeam, season, onToggleSidebar, isExpanded }) => (
       </h1>
     </div>
     <div className="flex items-center space-x-4">
-      <span className="text-gray-300 hidden md:block">{userTeam.name}</span>
-      <span className="font-semibold bg-gray-700 px-3 py-1 rounded-full text-sm">
+      <span className="text-blue-100 hidden md:block">{userTeam.name}</span>
+      <span className="font-bold bg-yellow-500 text-blue-950 px-3 py-1 rounded-full text-sm border-2 border-yellow-400 shadow-lg shadow-yellow-500/50">
         Season {season}
       </span>
     </div>
@@ -1298,9 +1298,9 @@ const Dashboard = ({ state, dispatch }) => {
                 return (
                     <CardContent className="space-y-4">
                         <div className="flex items-center justify-around text-center">
-                          <div><h4 className="text-2xl font-bold text-white">{getTeamName(nextMatch.homeTeamId)}</h4><span className="text-gray-400">Home</span></div>
-                          <span className="text-4xl font-light text-gray-500">VS</span>
-                          <div><h4 className="text-2xl font-bold text-white">{getTeamName(nextMatch.awayTeamId)}</h4><span className="text-gray-400">Away</span></div>
+                          <div><h4 className="text-2xl font-bold text-white">{getTeamName(nextMatch.homeTeamId)}</h4><span className="text-blue-200">Home</span></div>
+                          <span className="text-4xl font-light text-blue-300">VS</span>
+                          <div><h4 className="text-2xl font-bold text-white">{getTeamName(nextMatch.awayTeamId)}</h4><span className="text-blue-200">Away</span></div>
                         </div>
                         <div className="flex space-x-4">
                           <Button Icon={ChevronsRight} label="Play Match" onClick={() => dispatch({ type: 'NAVIGATE', payload: 'SIM_MATCH', matchId: nextMatch.id })} className="w-full" variant="success" />
@@ -1311,7 +1311,7 @@ const Dashboard = ({ state, dispatch }) => {
             }
             return (
                 <CardContent>
-                    <p className="text-gray-300 text-center">No more matches this season!</p>
+                    <p className="text-blue-100 text-center">No more matches this season!</p>
                     <Button Icon={ChevronsRight} label="Simulate to Playoffs" onClick={() => dispatch({ type: 'SIMULATE_SEASON' })} className="w-full mt-4" variant="danger" />
                 </CardContent>
             );
@@ -1330,7 +1330,7 @@ const Dashboard = ({ state, dispatch }) => {
         case 'OFF_SEASON_PROGRESSION':
              return <CardContent><Button Icon={TrendingUp} label="View Player Progression" onClick={() => dispatch({ type: 'NAVIGATE', payload: 'OFF_SEASON_PROGRESSION' })} className="w-full mt-4" variant="success" /></CardContent>;
         default:
-             return <CardContent><p className="text-gray-300 text-center">Current Phase: {game.phase}</p></CardContent>;
+             return <CardContent><p className="text-blue-100 text-center">Current Phase: {game.phase}</p></CardContent>;
     }
   };
 
@@ -1339,12 +1339,12 @@ const Dashboard = ({ state, dispatch }) => {
       <Card className="md:col-span-1">
         <CardHeader><h3 className="text-lg font-semibold text-white">{userTeam.name} Overview</h3></CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex justify-between items-center p-4 bg-gray-700 rounded-lg">
-            <span className="text-gray-300 text-lg">Record</span>
+          <div className="flex justify-between items-center p-4 bg-blue-700 rounded-lg">
+            <span className="text-blue-100 text-lg">Record</span>
             <span className="text-2xl font-bold text-white">{userRecord}</span>
           </div>
-          <div className="flex justify-between items-center p-4 bg-gray-700 rounded-lg">
-            <span className="text-gray-300 text-lg">Salary</span>
+          <div className="flex justify-between items-center p-4 bg-blue-700 rounded-lg">
+            <span className="text-blue-100 text-lg">Salary</span>
             <span className={`text-2xl font-bold ${userTeam.salary > game.salaryCap ? 'text-red-500' : 'text-white'}`}>
                 ${(userTeam.salary / 1000).toFixed(1)}k / ${(game.salaryCap / 1000)}k
             </span>
@@ -1363,9 +1363,9 @@ const Dashboard = ({ state, dispatch }) => {
         <CardContent className="max-h-64 overflow-y-auto">
           <ul className="space-y-3">
             {game.news.map(item => (
-              <li key={item.id} className="p-3 bg-gray-700 rounded-lg">
-                <span className="font-semibold text-cyan-400">[S{item.season}]</span>
-                <span className="text-gray-300 ml-2">{item.text}</span>
+              <li key={item.id} className="p-3 bg-blue-700 rounded-lg">
+                <span className="font-semibold text-yellow-400">[S{item.season}]</span>
+                <span className="text-blue-100 ml-2">{item.text}</span>
               </li>
             ))}
           </ul>
@@ -1377,15 +1377,15 @@ const Dashboard = ({ state, dispatch }) => {
 
 const StatBar = ({ label, value, max = 99 }) => {
   const width = `${(value / max) * 100}%`;
-  let color = 'bg-cyan-500';
-  if (value > 80) color = 'bg-green-500';
-  else if (value > 60) color = 'bg-yellow-500';
-  else if (value < 40) color = 'bg-red-500';
+  let color = 'bg-yellow-400 shadow-yellow-400/50';
+  if (value > 80) color = 'bg-green-500 shadow-green-500/50';
+  else if (value > 60) color = 'bg-yellow-500 shadow-yellow-500/50';
+  else if (value < 40) color = 'bg-red-500 shadow-red-500/50';
   return (
     <div className="flex items-center space-x-2">
-      <span className="w-8 font-bold text-sm text-gray-300">{label}</span>
-      <div className="w-full bg-gray-700 rounded-full h-4 overflow-hidden"><div className={`h-full rounded-full ${color} transition-all duration-300`} style={{ width }}></div></div>
-      <span className="w-8 font-bold text-sm text-white text-right">{value}</span>
+      <span className="w-8 font-bold text-sm text-yellow-400">{label}</span>
+      <div className="w-full bg-blue-900 rounded-full h-4 overflow-hidden border border-blue-600"><div className={`h-full rounded-full ${color} shadow-md transition-all duration-300`} style={{ width }}></div></div>
+      <span className="w-8 font-bold text-sm text-yellow-400 text-right">{value}</span>
     </div>
   );
 };
@@ -1424,28 +1424,28 @@ const PlayerCard = ({ player, state, onClose }) => {
   }, [player.id, history]);
 
   const AwardItem = ({ label, seasons }) => (
-    seasons.length > 0 && (<div className="text-gray-300"><span className="font-semibold text-white">{label} ({seasons.length}):</span><span className="text-sm ml-2">{seasons.join(', ')}</span></div>)
+    seasons.length > 0 && (<div className="text-blue-100"><span className="font-semibold text-white">{label} ({seasons.length}):</span><span className="text-sm ml-2">{seasons.join(', ')}</span></div>)
   );
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-      <Card className="w-full max-w-4xl border border-cyan-500 shadow-2xl">
+    <div className="fixed inset-0 bg-blue-950/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <Card className="w-full max-w-4xl border border-yellow-500 shadow-2xl">
         <CardHeader className="flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold text-white">{player.name}</h2>
-            <span className="text-lg text-gray-400">{POSITIONS[player.position]} | Age: {player.age} | OVR: {player.overall}</span>
+            <span className="text-lg text-blue-200">{POSITIONS[player.position]} | Age: {player.age} | OVR: {player.overall}</span>
           </div>
           <Button onClick={onClose} variant="secondary">Close</Button>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-6 max-h-[70vh] overflow-y-auto">
-          <div className="space-y-3 p-4 bg-gray-700 rounded-lg md:col-span-1">
+          <div className="space-y-3 p-4 bg-blue-700 rounded-lg md:col-span-1">
             <h4 className="text-xl font-semibold text-white mb-2">Attributes</h4>
             {statPairs.map(s => <StatBar key={s.label} label={s.label} value={s.value} />)}
-             <div className="flex items-center pt-2"><span className="w-8 font-bold text-sm text-gray-300">POT</span><span className="text-xl text-yellow-400 ml-2">{getPotentialStars(player.potential)}</span></div>
+             <div className="flex items-center pt-2"><span className="w-8 font-bold text-sm text-blue-100">POT</span><span className="text-xl text-yellow-400 ml-2">{getPotentialStars(player.potential)}</span></div>
              <div className="pt-2">
                 <h4 className="text-lg font-semibold text-white">Contract</h4>
                 {contract && contract.years > 0 ? (
-                    <p className="text-gray-300">${contract.salary} / {contract.years} Year(s)</p>
+                    <p className="text-blue-100">${contract.salary} / {contract.years} Year(s)</p>
                 ) : (
                     <p className="text-yellow-400">Contract Expired</p>
                 )}
@@ -1453,22 +1453,22 @@ const PlayerCard = ({ player, state, onClose }) => {
           </div>
           <div className="space-y-4 md:col-span-2">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-               <div className="p-4 bg-gray-700 rounded-lg">
+               <div className="p-4 bg-blue-700 rounded-lg">
                   <h4 className="text-xl font-semibold text-white mb-2">This Season</h4>
-                  <div className="grid grid-cols-2 gap-2 text-gray-300">
+                  <div className="grid grid-cols-2 gap-2 text-blue-100">
                     {player.position !== 'GK' ? (<><span>Goals: <span className="font-bold text-white">{goals}</span></span><span>Assists: <span className="font-bold text-white">{assists}</span></span><span>Stocks: <span className="font-bold text-white">{stocks}</span></span></>)
                     : (<><span>Saves: <span className="font-bold text-white">{saves}</span></span><span>Save %: <span className="font-bold text-white">{savePct}%</span></span><span>Assists: <span className="font-bold text-white">{assists}</span></span></>)}
                   </div>
                </div>
-               <div className="p-4 bg-gray-700 rounded-lg">
+               <div className="p-4 bg-blue-700 rounded-lg">
                   <h4 className="text-xl font-semibold text-white mb-2">Career</h4>
-                  <div className="grid grid-cols-2 gap-2 text-gray-300">
+                  <div className="grid grid-cols-2 gap-2 text-blue-100">
                     {player.position !== 'GK' ? (<><span>Goals: <span className="font-bold text-white">{cGoals}</span></span><span>Assists: <span className="font-bold text-white">{cAssists}</span></span><span>Stocks: <span className="font-bold text-white">{cStocks}</span></span></>)
                     : (<><span>Saves: <span className="font-bold text-white">{cSaves}</span></span><span>Save %: <span className="font-bold text-white">{cSavePct}%</span></span><span>Assists: <span className="font-bold text-white">{cAssists}</span></span></>)}
                   </div>
                </div>
             </div>
-            <div className="p-4 bg-gray-700 rounded-lg">
+            <div className="p-4 bg-blue-700 rounded-lg">
               <h4 className="text-xl font-semibold text-white mb-2">Career Awards</h4>
               <div className="space-y-1">
                 <AwardItem label="🏆 Championship" seasons={careerAwards.championships} />
@@ -1477,7 +1477,7 @@ const PlayerCard = ({ player, state, onClose }) => {
                 <AwardItem label="🛡️ DPOY" seasons={careerAwards.dpoy} />
                 <AwardItem label="🥇 1st Team All-Blitz" seasons={careerAwards.firstTeam} />
                 <AwardItem label="🥈 2nd Team All-Blitz" seasons={careerAwards.secondTeam} />
-                {Object.values(careerAwards).every(arr => arr.length === 0) && (<p className="text-gray-400 italic">No awards yet.</p>)}
+                {Object.values(careerAwards).every(arr => arr.length === 0) && (<p className="text-blue-200 italic">No awards yet.</p>)}
               </div>
             </div>
           </div>
@@ -1499,16 +1499,16 @@ const TeamRosterModal = ({ teamId, state, dispatch }) => {
     });
   const handlePlayerClick = (playerId) => { dispatch({ type: 'MODAL_OPEN', payload: { type: 'PLAYER', playerId } }); };
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-      <Card className="w-full max-w-4xl border border-cyan-500 shadow-2xl">
+    <div className="fixed inset-0 bg-blue-950/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <Card className="w-full max-w-4xl border border-yellow-500 shadow-2xl">
         <CardHeader className="flex justify-between items-center">
           <h2 className="text-2xl font-bold text-white">{team.name} Roster</h2>
           <Button onClick={() => dispatch({ type: 'MODAL_CLOSE' })} variant="secondary">Close</Button>
         </CardHeader>
         <CardContent className="max-h-[70vh] overflow-y-auto">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-gray-300">
-              <thead className="text-xs text-gray-400 uppercase bg-gray-700">
+            <table className="w-full text-left text-blue-100">
+              <thead className="text-xs text-blue-200 uppercase bg-blue-700">
                 <tr>
                   <th scope="col" className="px-6 py-3">Name</th>
                   <th scope="col" className="px-6 py-3">Pos</th>
@@ -1527,8 +1527,8 @@ const TeamRosterModal = ({ teamId, state, dispatch }) => {
                     statsDisplay = `${p.seasonStats.goals}/${p.seasonStats.assists}/${p.seasonStats.stocks}`;
                   }
                   return (
-                    <tr key={p.id} className="bg-gray-800 border-b border-gray-700 hover:bg-gray-700">
-                      <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap"><button onClick={() => handlePlayerClick(p.id)} className="hover:underline text-cyan-400 font-semibold">{p.name}</button></th>
+                    <tr key={p.id} className="bg-gradient-to-br from-blue-800 to-blue-900 border-b border-yellow-600/30 hover:bg-blue-700">
+                      <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap"><button onClick={() => handlePlayerClick(p.id)} className="hover:underline text-yellow-400 font-semibold">{p.name}</button></th>
                       <td className="px-6 py-4">{p.position}</td>
                       <td className="px-6 py-4">{p.age}</td>
                       <td className="px-6 py-4 font-bold">{p.overall}</td>
@@ -1562,8 +1562,8 @@ const TeamManagement = ({ state, dispatch }) => {
         <div>
           <h4 className="text-xl font-semibold text-white mb-3">Field Players</h4>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-gray-300">
-              <thead className="text-xs text-gray-400 uppercase bg-gray-700">
+            <table className="w-full text-left text-blue-100">
+              <thead className="text-xs text-blue-200 uppercase bg-blue-700">
                 <tr>
                   <th scope="col" className="px-6 py-3">Name</th><th scope="col" className="px-6 py-3">Pos</th>
                   <th scope="col" className="px-6 py-3">Age</th><th scope="col" className="px-6 py-3">OVR</th>
@@ -1572,7 +1572,7 @@ const TeamManagement = ({ state, dispatch }) => {
               </thead>
               <tbody>
                 {fieldPlayers.map(p => (
-                  <tr key={p.id} className="bg-gray-800 border-b border-gray-700 hover:bg-gray-700">
+                  <tr key={p.id} className="bg-gradient-to-br from-blue-800 to-blue-900 border-b border-yellow-600/30 hover:bg-blue-700">
                     <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap">{p.name}</th>
                     <td className="px-6 py-4">{p.position}</td><td className="px-6 py-4">{p.age}</td>
                     <td className="px-6 py-4 font-bold">{p.overall}</td>
@@ -1587,8 +1587,8 @@ const TeamManagement = ({ state, dispatch }) => {
         <div>
           <h4 className="text-xl font-semibold text-white mb-3">Goalkeepers</h4>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-gray-300">
-              <thead className="text-xs text-gray-400 uppercase bg-gray-700">
+            <table className="w-full text-left text-blue-100">
+              <thead className="text-xs text-blue-200 uppercase bg-blue-700">
                 <tr>
                   <th scope="col" className="px-6 py-3">Name</th><th scope="col" className="px-6 py-3">Pos</th>
                   <th scope="col" className="px-6 py-3">Age</th><th scope="col" className="px-6 py-3">OVR</th>
@@ -1599,7 +1599,7 @@ const TeamManagement = ({ state, dispatch }) => {
                 {goalkeepers.map(p => {
                   const savePct = (p.seasonStats.shotsFaced > 0 ? (p.seasonStats.saves / p.seasonStats.shotsFaced * 100) : 0).toFixed(1);
                   return (
-                    <tr key={p.id} className="bg-gray-800 border-b border-gray-700 hover:bg-gray-700">
+                    <tr key={p.id} className="bg-gradient-to-br from-blue-800 to-blue-900 border-b border-yellow-600/30 hover:bg-blue-700">
                       <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap">{p.name}</th>
                       <td className="px-6 py-4">{p.position}</td><td className="px-6 py-4">{p.age}</td>
                       <td className="px-6 py-4 font-bold">{p.overall}</td>
@@ -1627,8 +1627,8 @@ const LeagueStandings = ({ state, dispatch }) => {
       <CardHeader><h3 className="text-lg font-semibold text-white">League Standings - Season {state.game.currentSeason}</h3></CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-gray-300">
-            <thead className="text-xs text-gray-400 uppercase bg-gray-700">
+          <table className="w-full text-left text-blue-100">
+            <thead className="text-xs text-blue-200 uppercase bg-blue-700">
               <tr>
                 <th scope="col" className="px-6 py-3">#</th><th scope="col" className="px-6 py-3">Team</th>
                 <th scope="col" className="px-6 py-3">W</th><th scope="col" className="px-6 py-3">D</th>
@@ -1639,7 +1639,7 @@ const LeagueStandings = ({ state, dispatch }) => {
             </thead>
             <tbody>
               {sortedTeams.map((t, index) => (
-                <tr key={t.id} className={`border-b border-gray-700 ${t.id === state.game.userTeamId ? 'bg-cyan-900' : 'bg-gray-800'} ${index < playoffCutoff ? 'border-l-4 border-yellow-500' : ''}`}>
+                <tr key={t.id} className={`border-b border-yellow-600/30 ${t.id === state.game.userTeamId ? 'bg-cyan-900' : 'bg-gradient-to-br from-blue-800 to-blue-900'} ${index < playoffCutoff ? 'border-l-4 border-yellow-500' : ''}`}>
                   <td className="px-6 py-4 font-bold">{index + 1}</td>
                   <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap"><button onClick={() => handleTeamClick(t.id)} className="hover:underline font-semibold">{t.name}</button></th>
                   <td className="px-6 py-4">{t.wins}</td><td className="px-6 py-4">{t.draws}</td>
@@ -1650,7 +1650,7 @@ const LeagueStandings = ({ state, dispatch }) => {
               ))}
             </tbody>
           </table>
-          <div className="mt-4 flex items-center space-x-2"><div className="w-4 h-4 bg-yellow-500 border-2 border-yellow-500"></div><span className="text-sm text-gray-400">Playoff Team</span></div>
+          <div className="mt-4 flex items-center space-x-2"><div className="w-4 h-4 bg-yellow-500 border-2 border-yellow-500"></div><span className="text-sm text-blue-200">Playoff Team</span></div>
         </div>
       </CardContent>
     </Card>
@@ -1671,16 +1671,16 @@ const ScheduleView = ({ state, dispatch }) => {
        <CardContent className="space-y-6 max-h-[80vh] overflow-y-auto">
        {weeks.map((games, weekIndex) => (
          <div key={weekIndex} className="space-y-3">
-           <h4 className="text-xl font-semibold text-cyan-400 border-b border-gray-600 pb-2">Week {weekIndex + 1}</h4>
+           <h4 className="text-xl font-semibold text-yellow-400 border-b border-blue-600/40 pb-2">Week {weekIndex + 1}</h4>
            {games.map(match => {
              const MatchWrapper = match.played ? 'button' : 'div';
              return (
                <MatchWrapper key={match.id} onClick={match.played ? () => dispatch({ type: 'MODAL_OPEN', payload: { type: 'BOX_SCORE', match } }) : undefined}
-                 className={`p-4 bg-gray-700 rounded-lg flex items-center justify-between w-full text-left ${match.played ? 'hover:bg-gray-600 cursor-pointer transition-colors' : ''}`}>
+                 className={`p-4 bg-blue-700 rounded-lg flex items-center justify-between w-full text-left ${match.played ? 'hover:bg-blue-600 cursor-pointer transition-colors' : ''}`}>
                  <span className="w-1/3 text-right font-semibold text-lg text-white">{getTeamName(match.homeTeamId)}</span>
                  <div className="w-1/3 text-center">
                    {match.played ? (<span className="text-2xl font-bold">{`${match.homeScore} - ${match.awayScore}`}</span>)
-                   : (<span className="text-gray-400">vs</span>)}
+                   : (<span className="text-blue-200">vs</span>)}
                  </div>
                  <span className="w-1/3 text-left font-semibold text-lg text-white">{getTeamName(match.awayTeamId)}</span>
                </MatchWrapper>
@@ -1722,34 +1722,34 @@ const BoxScoreModal = ({ match, state, dispatch }) => {
   const homeStats = getStats(homeTeam);
   const awayStats = getStats(awayTeam);
   const FieldPlayerStatTable = ({ title, stats }) => (
-    <div className="p-4 bg-gray-700 rounded-lg">
+    <div className="p-4 bg-blue-700 rounded-lg">
       <h4 className="text-xl font-semibold text-white mb-2">{title}</h4>
-      <table className="w-full text-left text-sm text-gray-300">
-        <thead className="text-xs text-gray-400 uppercase bg-gray-900"><tr><th scope="col" className="px-4 py-2">Player</th><th scope="col" className="px-4 py-2">Pos</th><th scope="col" className="px-4 py-2">G</th><th scope="col" className="px-4 py-2">A</th><th scope="col" className="px-4 py-2">St</th></tr></thead>
+      <table className="w-full text-left text-sm text-blue-100">
+        <thead className="text-xs text-blue-200 uppercase bg-gradient-to-br from-blue-900 to-blue-800"><tr><th scope="col" className="px-4 py-2">Player</th><th scope="col" className="px-4 py-2">Pos</th><th scope="col" className="px-4 py-2">G</th><th scope="col" className="px-4 py-2">A</th><th scope="col" className="px-4 py-2">St</th></tr></thead>
         <tbody>
-          {stats.length === 0 && (<tr><td colSpan="5" className="px-4 py-3 text-center text-gray-400 italic">No stats recorded.</td></tr>)}
+          {stats.length === 0 && (<tr><td colSpan="5" className="px-4 py-3 text-center text-blue-200 italic">No stats recorded.</td></tr>)}
           {stats.map((p, i) => (<tr key={i} className="border-b border-gray-900"><th scope="row" className="px-4 py-2 font-medium text-white">{p.name}</th><td className="px-4 py-2">{p.pos}</td><td className="px-4 py-2">{p.goals}</td><td className="px-4 py-2">{p.assists}</td><td className="px-4 py-2">{p.stocks}</td></tr>))}
         </tbody>
       </table>
     </div>
   );
   const GoalkeeperStatTable = ({ title, stats }) => (
-    <div className="p-4 bg-gray-700 rounded-lg">
+    <div className="p-4 bg-blue-700 rounded-lg">
       <h4 className="text-xl font-semibold text-white mb-2">{title}</h4>
-      <table className="w-full text-left text-sm text-gray-300">
-        <thead className="text-xs text-gray-400 uppercase bg-gray-900"><tr><th scope="col" className="px-4 py-2">Player</th><th scope="col" className="px-4 py-2">S</th><th scope="col" className="px-4 py-2">A</th><th scope="col" className="px-4 py-2">S%</th></tr></thead>
+      <table className="w-full text-left text-sm text-blue-100">
+        <thead className="text-xs text-blue-200 uppercase bg-gradient-to-br from-blue-900 to-blue-800"><tr><th scope="col" className="px-4 py-2">Player</th><th scope="col" className="px-4 py-2">S</th><th scope="col" className="px-4 py-2">A</th><th scope="col" className="px-4 py-2">S%</th></tr></thead>
         <tbody>
-          {stats.length === 0 && (<tr><td colSpan="4" className="px-4 py-3 text-center text-gray-400 italic">No stats recorded.</td></tr>)}
+          {stats.length === 0 && (<tr><td colSpan="4" className="px-4 py-3 text-center text-blue-200 italic">No stats recorded.</td></tr>)}
           {stats.map((p, i) => (<tr key={i} className="border-b border-gray-900"><th scope="row" className="px-4 py-2 font-medium text-white">{p.name}</th><td className="px-4 py-2">{p.saves}</td><td className="px-4 py-2">{p.assists}</td><td className="px-4 py-2">{p.savePct}%</td></tr>))}
         </tbody>
       </table>
     </div>
   );
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-      <Card className="w-full max-w-4xl border border-cyan-500 shadow-2xl">
+    <div className="fixed inset-0 bg-blue-950/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <Card className="w-full max-w-4xl border border-yellow-500 shadow-2xl">
         <CardHeader className="flex justify-between items-center">
-          <div className="text-center w-full"><h2 className="text-2xl font-bold text-white">{homeTeam.name} vs {awayTeam.name}</h2><span className="text-3xl font-bold text-cyan-400">{match.homeScore} - {match.awayScore}</span></div>
+          <div className="text-center w-full"><h2 className="text-2xl font-bold text-white">{homeTeam.name} vs {awayTeam.name}</h2><span className="text-3xl font-bold text-yellow-400">{match.homeScore} - {match.awayScore}</span></div>
           <Button onClick={() => dispatch({ type: 'MODAL_CLOSE' })} variant="secondary" className="absolute top-4 right-4">Close</Button>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto">
@@ -1771,25 +1771,25 @@ const AwardsModal = ({ state, dispatch }) => {
   const dpoy = getPlayer(currentAwards.dpoy);
   const finalsMvp = getPlayer(currentAwards.finalsMvp);
   const AwardCard = ({ title, player }) => (
-    <div className="p-4 bg-gray-700 rounded-lg text-center h-full"><h4 className="text-lg font-semibold text-yellow-400">{title}</h4><p className="text-2xl font-bold text-white">{player.name}</p><p className="text-sm text-gray-400">{POSITIONS[player.position]} | {getTeamName(player.teamId)}</p></div>
+    <div className="p-4 bg-blue-700 rounded-lg text-center h-full"><h4 className="text-lg font-semibold text-yellow-400">{title}</h4><p className="text-2xl font-bold text-white">{player.name}</p><p className="text-sm text-blue-200">{POSITIONS[player.position]} | {getTeamName(player.teamId)}</p></div>
   );
   const TeamList = ({ title, playerIds }) => (
-    <div className="p-4 bg-gray-700 rounded-lg"><h4 className="text-lg font-semibold text-yellow-400 mb-2">{title}</h4><ul className="space-y-2">
+    <div className="p-4 bg-blue-700 rounded-lg"><h4 className="text-lg font-semibold text-yellow-400 mb-2">{title}</h4><ul className="space-y-2">
         {playerIds.map((pid, i) => {
           const player = getPlayer(pid);
-          return (<li key={i} className="flex justify-between items-center bg-gray-900 p-2 rounded"><span className="font-semibold text-white">{player.name}</span><span className="text-sm text-gray-400">{POSITIONS[player.position]} | {getTeamName(player.teamId)}</span></li>);
+          return (<li key={i} className="flex justify-between items-center bg-gradient-to-br from-blue-900 to-blue-800 p-2 rounded"><span className="font-semibold text-white">{player.name}</span><span className="text-sm text-blue-200">{POSITIONS[player.position]} | {getTeamName(player.teamId)}</span></li>);
         })}
     </ul></div>
   );
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-blue-950/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <Card className="w-full max-w-4xl border border-yellow-500 shadow-2xl">
         <CardHeader className="text-center relative"><Award className="w-12 h-12 text-yellow-400 mx-auto mb-2" /><h2 className="text-3xl font-bold text-white">Season {game.currentSeason} Awards</h2></CardHeader>
         <CardContent className="space-y-6 max-h-[70vh] overflow-y-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6"><AwardCard title="League MVP" player={mvp} /><AwardCard title="Finals MVP" player={finalsMvp} /><AwardCard title="Defensive Player of the Year" player={dpoy} /></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6"><TeamList title="1st Team All-Blitz" playerIds={currentAwards.firstTeam} /><TeamList title="2nd Team All-Blitz" playerIds={currentAwards.secondTeam} /></div>
         </CardContent>
-        <div className="p-4 bg-gray-900 text-center"><Button Icon={ChevronsRight} label="Continue to Off-Season" onClick={() => dispatch({ type: 'ACKNOWLEDGE_AWARDS' })} variant="success" /></div>
+        <div className="p-4 bg-gradient-to-br from-blue-900 to-blue-800 text-center"><Button Icon={ChevronsRight} label="Continue to Off-Season" onClick={() => dispatch({ type: 'ACKNOWLEDGE_AWARDS' })} variant="success" /></div>
       </Card>
     </div>
   );
@@ -1802,30 +1802,30 @@ const LeagueHistory = ({ state }) => {
   const getPlayer = (id) => league.players[id] || { name: 'N/A', position: 'N/A', teamId: null };
   const getTeamName = (id) => league.teams.find(t => t.id === id)?.name || 'N/A';
   const TabButton = ({ label, tabId }) => (
-    <button onClick={() => setActiveTab(tabId)} className={`px-4 py-2 font-semibold rounded-t-lg ${activeTab === tabId ? 'bg-gray-700 text-cyan-400' : 'bg-gray-900 text-gray-400 hover:bg-gray-800'}`}>{label}</button>
+    <button onClick={() => setActiveTab(tabId)} className={`px-4 py-2 font-semibold rounded-t-lg ${activeTab === tabId ? 'bg-blue-700 text-yellow-400' : 'bg-gradient-to-br from-blue-900 to-blue-800 text-blue-200 hover:bg-gradient-to-br from-blue-800 to-blue-900'}`}>{label}</button>
   );
   const renderContent = () => {
     switch (activeTab) {
       case 'CHAMPIONS':
-        return (<ul className="space-y-2">{history.champions.length === 0 ? (<p className="text-gray-400">No champions yet.</p>) : ([...history.champions].reverse().map((c, index) => (<li key={index} className="flex justify-between p-3 bg-gray-700 rounded-lg"><span className="font-semibold text-gray-300">Season {c.season}</span><span className="font-bold text-yellow-400">{c.teamName}</span></li>)))}</ul>);
+        return (<ul className="space-y-2">{history.champions.length === 0 ? (<p className="text-blue-200">No champions yet.</p>) : ([...history.champions].reverse().map((c, index) => (<li key={index} className="flex justify-between p-3 bg-blue-700 rounded-lg"><span className="font-semibold text-blue-100">Season {c.season}</span><span className="font-bold text-yellow-400">{c.teamName}</span></li>)))}</ul>);
       case 'MVP': case 'DPOY': case 'FINALS_MVP':
         const awardKey = activeTab === 'MVP' ? 'mvp' : (activeTab === 'DPOY' ? 'dpoy' : 'finalsMvp');
-        return (<ul className="space-y-2">{history.awards.length === 0 ? (<p className="text-gray-400">No awards yet.</p>) : ([...history.awards].reverse().map((a, index) => { const player = getPlayer(a[awardKey]); return (<li key={index} className="flex justify-between p-3 bg-gray-700 rounded-lg"><span className="font-semibold text-gray-300">Season {a.season}</span><div className="text-right"><span className="font-bold text-yellow-400">{player.name}</span><span className="text-sm text-gray-400 ml-2">({getTeamName(player.teamId)})</span></div></li>);}))}</ul>);
+        return (<ul className="space-y-2">{history.awards.length === 0 ? (<p className="text-blue-200">No awards yet.</p>) : ([...history.awards].reverse().map((a, index) => { const player = getPlayer(a[awardKey]); return (<li key={index} className="flex justify-between p-3 bg-blue-700 rounded-lg"><span className="font-semibold text-blue-100">Season {a.season}</span><div className="text-right"><span className="font-bold text-yellow-400">{player.name}</span><span className="text-sm text-blue-200 ml-2">({getTeamName(player.teamId)})</span></div></li>);}))}</ul>);
       case 'ALL_BLITZ':
-        return (<div className="space-y-6">{history.awards.length === 0 ? (<p className="text-gray-400">No awards yet.</p>) : ([...history.awards].reverse().map((a, index) => (<div key={index} className="p-4 bg-gray-700 rounded-lg"><h5 className="text-xl font-bold text-white mb-3">Season {a.season}</h5><div className="grid grid-cols-1 md:grid-cols-2 gap-4"><TeamList title="1st Team All-Blitz" playerIds={a.firstTeam} getPlayer={getPlayer} getTeamName={getTeamName} /><TeamList title="2nd Team All-Blitz" playerIds={a.secondTeam} getPlayer={getPlayer} getTeamName={getTeamName} /></div></div>)))}</div>);
+        return (<div className="space-y-6">{history.awards.length === 0 ? (<p className="text-blue-200">No awards yet.</p>) : ([...history.awards].reverse().map((a, index) => (<div key={index} className="p-4 bg-blue-700 rounded-lg"><h5 className="text-xl font-bold text-white mb-3">Season {a.season}</h5><div className="grid grid-cols-1 md:grid-cols-2 gap-4"><TeamList title="1st Team All-Blitz" playerIds={a.firstTeam} getPlayer={getPlayer} getTeamName={getTeamName} /><TeamList title="2nd Team All-Blitz" playerIds={a.secondTeam} getPlayer={getPlayer} getTeamName={getTeamName} /></div></div>)))}</div>);
       default: return null;
     }
   };
   const TeamList = ({ title, playerIds, getPlayer, getTeamName }) => (
-    <div className="p-3 bg-gray-900 rounded-lg"><h4 className="text-lg font-semibold text-yellow-400 mb-2">{title}</h4><ul className="space-y-2">
-        {playerIds.map((pid, i) => { const player = getPlayer(pid); return (<li key={i} className="flex justify-between items-center bg-gray-800 p-2 rounded"><div><span className="font-semibold text-white">{player.name}</span><span className="text-xs text-gray-500 ml-2">{POSITIONS[player.position]}</span></div><span className="text-sm text-gray-400">{getTeamName(player.teamId)}</span></li>);})}
+    <div className="p-3 bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg"><h4 className="text-lg font-semibold text-yellow-400 mb-2">{title}</h4><ul className="space-y-2">
+        {playerIds.map((pid, i) => { const player = getPlayer(pid); return (<li key={i} className="flex justify-between items-center bg-gradient-to-br from-blue-800 to-blue-900 p-2 rounded"><div><span className="font-semibold text-white">{player.name}</span><span className="text-xs text-blue-300 ml-2">{POSITIONS[player.position]}</span></div><span className="text-sm text-blue-200">{getTeamName(player.teamId)}</span></li>);})}
     </ul></div>
   );
   return (
     <Card>
       <CardHeader><h3 className="text-lg font-semibold text-white">League History</h3></CardHeader>
-      <div className="px-4 pt-4 bg-gray-800"><nav className="flex space-x-1"><TabButton label="Champions" tabId="CHAMPIONS" /><TabButton label="MVP" tabId="MVP" /><TabButton label="Finals MVP" tabId="FINALS_MVP" /><TabButton label="DPOY" tabId="DPOY" /><TabButton label="All-Blitz Teams" tabId="ALL_BLITZ" /></nav></div>
-      <CardContent className="bg-gray-700 rounded-b-xl max-h-[70vh] overflow-y-auto">{renderContent()}</CardContent>
+      <div className="px-4 pt-4 bg-gradient-to-br from-blue-800 to-blue-900"><nav className="flex space-x-1"><TabButton label="Champions" tabId="CHAMPIONS" /><TabButton label="MVP" tabId="MVP" /><TabButton label="Finals MVP" tabId="FINALS_MVP" /><TabButton label="DPOY" tabId="DPOY" /><TabButton label="All-Blitz Teams" tabId="ALL_BLITZ" /></nav></div>
+      <CardContent className="bg-blue-700 rounded-b-xl max-h-[70vh] overflow-y-auto">{renderContent()}</CardContent>
     </Card>
   );
 }
@@ -1890,28 +1890,28 @@ const TeamHistory = ({ state }) => {
     saves: findRecord('saves', true), savePct: findRecord('savePct', true),
   }), [teamPlayerSeasons]);
   const TabButton = ({ label, tabId }) => (
-    <button onClick={() => setActiveTab(tabId)} className={`px-4 py-2 font-semibold rounded-t-lg ${activeTab === tabId ? 'bg-gray-700 text-cyan-400' : 'bg-gray-900 text-gray-400 hover:bg-gray-800'}`}>{label}</button>
+    <button onClick={() => setActiveTab(tabId)} className={`px-4 py-2 font-semibold rounded-t-lg ${activeTab === tabId ? 'bg-blue-700 text-yellow-400' : 'bg-gradient-to-br from-blue-900 to-blue-800 text-blue-200 hover:bg-gradient-to-br from-blue-800 to-blue-900'}`}>{label}</button>
   );
   const RecordRow = ({ label, record }) => (
-    <li className="flex justify-between p-3 bg-gray-900 rounded-lg"><span className="font-semibold text-gray-300">{label}</span><div className="text-right"><span className="font-bold text-yellow-400 text-lg">{record.value}</span><span className="text-sm text-gray-400 ml-2">({record.player}{record.season && `, S${record.season}`})</span></div></li>
+    <li className="flex justify-between p-3 bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg"><span className="font-semibold text-blue-100">{label}</span><div className="text-right"><span className="font-bold text-yellow-400 text-lg">{record.value}</span><span className="text-sm text-blue-200 ml-2">({record.player}{record.season && `, S${record.season}`})</span></div></li>
   );
   const CareerRecordRow = ({ label, record }) => (
-    <li className="flex justify-between p-3 bg-gray-900 rounded-lg"><span className="font-semibold text-gray-300">{label}</span><div className="text-right"><span className="font-bold text-yellow-400 text-lg">{record.value}</span><span className="text-sm text-gray-400 ml-2">({record.player})</span></div></li>
+    <li className="flex justify-between p-3 bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg"><span className="font-semibold text-blue-100">{label}</span><div className="text-right"><span className="font-bold text-yellow-400 text-lg">{record.value}</span><span className="text-sm text-blue-200 ml-2">({record.player})</span></div></li>
   );
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader><h3 className="text-lg font-semibold text-white">{userTeam.name} - Team History</h3></CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 bg-gray-700 rounded-lg text-center"><h4 className="text-lg text-gray-300">All-Time Record</h4><p className="text-3xl font-bold text-white">{`${allTimeStats.wins}-${allTimeStats.losses}-${allTimeStats.draws}`}</p></div>
-          <div className="p-4 bg-gray-700 rounded-lg text-center"><h4 className="text-lg text-gray-300">League Banners</h4><p className="text-3xl font-bold text-yellow-400">{accolades.leagueBanners}</p><span className="text-sm text-gray-400">(#1 Regular Season)</span></div>
-          <div className="p-4 bg-gray-700 rounded-lg text-center"><h4 className="text-lg text-gray-300">Championships</h4><p className="text-3xl font-bold text-yellow-400">{accolades.championships}</p><span className="text-sm text-gray-400">(Playoff Winners)</span></div>
+          <div className="p-4 bg-blue-700 rounded-lg text-center"><h4 className="text-lg text-blue-100">All-Time Record</h4><p className="text-3xl font-bold text-white">{`${allTimeStats.wins}-${allTimeStats.losses}-${allTimeStats.draws}`}</p></div>
+          <div className="p-4 bg-blue-700 rounded-lg text-center"><h4 className="text-lg text-blue-100">League Banners</h4><p className="text-3xl font-bold text-yellow-400">{accolades.leagueBanners}</p><span className="text-sm text-blue-200">(#1 Regular Season)</span></div>
+          <div className="p-4 bg-blue-700 rounded-lg text-center"><h4 className="text-lg text-blue-100">Championships</h4><p className="text-3xl font-bold text-yellow-400">{accolades.championships}</p><span className="text-sm text-blue-200">(Playoff Winners)</span></div>
         </CardContent>
       </Card>
       <Card>
         <CardHeader><h3 className="text-lg font-semibold text-white">Team Records</h3></CardHeader>
-        <div className="px-4 pt-4 bg-gray-800"><nav className="flex space-x-1"><TabButton label="Single Season" tabId="RECORDS_SEASON" /><TabButton label="Career (with Team)" tabId="RECORDS_CAREER" /></nav></div>
-        <CardContent className="bg-gray-700 rounded-b-xl">
+        <div className="px-4 pt-4 bg-gradient-to-br from-blue-800 to-blue-900"><nav className="flex space-x-1"><TabButton label="Single Season" tabId="RECORDS_SEASON" /><TabButton label="Career (with Team)" tabId="RECORDS_CAREER" /></nav></div>
+        <CardContent className="bg-blue-700 rounded-b-xl">
           {activeTab === 'RECORDS_SEASON' && (<ul className="space-y-3"><h4 className="text-xl font-semibold text-white mb-2">Single Season Records</h4><RecordRow label="Goals" record={seasonRecords.goals} /><RecordRow label="Assists" record={seasonRecords.assists} /><RecordRow label="Stocks (Tkl/Blk)" record={seasonRecords.stocks} /><RecordRow label="Saves" record={seasonRecords.saves} /><RecordRow label="Save %" record={seasonRecords.savePct} /></ul>)}
           {activeTab === 'RECORDS_CAREER' && (<ul className="space-y-3"><h4 className="text-xl font-semibold text-white mb-2">Career Records (while on team)</h4><CareerRecordRow label="Goals" record={careerRecords.goals} /><CareerRecordRow label="Assists" record={careerRecords.assists} /><CareerRecordRow label="Stocks (Tkl/Blk)" record={careerRecords.stocks} /><CareerRecordRow label="Saves" record={careerRecords.saves} /><CareerRecordRow label="Save %" record={careerRecords.savePct} /></ul>)}
         </CardContent>
@@ -1925,7 +1925,7 @@ const PlayoffBracketView = ({ state, dispatch }) => {
   const { teams } = state.league;
   const getTeamName = (id) => teams.find(t => t.id === id)?.name || 'TBD';
   if (!playoffBracket) {
-    return (<Card><CardHeader><h3 className="text-lg font-semibold text-white">Playoff Bracket</h3></CardHeader><CardContent><p className="text-gray-400">The playoffs have not started yet.</p></CardContent></Card>);
+    return (<Card><CardHeader><h3 className="text-lg font-semibold text-white">Playoff Bracket</h3></CardHeader><CardContent><p className="text-blue-200">The playoffs have not started yet.</p></CardContent></Card>);
   }
   const { round1, round2, finals } = playoffBracket;
   const MatchCard = ({ match, seedA, seedB }) => {
@@ -1934,11 +1934,11 @@ const PlayoffBracketView = ({ state, dispatch }) => {
     const winnerA = match.winner === match.teamA; const winnerB = match.winner === match.teamB;
     const Wrapper = match.matchData ? 'button' : 'div';
     return (
-      <Wrapper className={`bg-gray-700 p-4 rounded-lg w-full text-left ${match.matchData ? 'hover:bg-gray-600 cursor-pointer' : ''}`}
+      <Wrapper className={`bg-blue-700 p-4 rounded-lg w-full text-left ${match.matchData ? 'hover:bg-blue-600 cursor-pointer' : ''}`}
         onClick={match.matchData ? () => dispatch({ type: 'MODAL_OPEN', payload: { type: 'BOX_SCORE', match: match.matchData } }) : undefined}>
-        <div className={`flex justify-between items-center ${winnerA ? 'font-bold text-white' : 'text-gray-300'}`}><span>({seedA}) {teamA}</span>{scoreA !== undefined && <span className="text-lg font-bold">{scoreA}</span>}</div>
-        <div className="border-t border-gray-600 my-2"></div>
-        <div className={`flex justify-between items-center ${winnerB ? 'font-bold text-white' : 'text-gray-300'}`}><span>({seedB}) {teamB}</span>{scoreB !== undefined && <span className="text-lg font-bold">{scoreB}</span>}</div>
+        <div className={`flex justify-between items-center ${winnerA ? 'font-bold text-white' : 'text-blue-100'}`}><span>({seedA}) {teamA}</span>{scoreA !== undefined && <span className="text-lg font-bold">{scoreA}</span>}</div>
+        <div className="border-t border-blue-600/40 my-2"></div>
+        <div className={`flex justify-between items-center ${winnerB ? 'font-bold text-white' : 'text-blue-100'}`}><span>({seedB}) {teamB}</span>{scoreB !== undefined && <span className="text-lg font-bold">{scoreB}</span>}</div>
       </Wrapper>
     );
   };
@@ -1949,9 +1949,9 @@ const PlayoffBracketView = ({ state, dispatch }) => {
       <CardContent className="space-y-6">
         {champion && (<div className="text-center p-4 bg-yellow-600 rounded-lg"><h2 className="text-2xl font-bold text-white">CHAMPION: {champion}</h2></div>)}
         <div className="flex flex-col md:flex-row justify-around items-start space-y-8 md:space-y-0 md:space-x-4">
-          <div className="space-y-4 w-full md:w-1/3"><h4 className="text-xl font-semibold text-cyan-400 text-center">Round 1</h4><MatchCard match={round1[0]} seedA={round1[0].seedA} seedB={round1[0].seedB} /><MatchCard match={round1[1]} seedA={round1[1].seedA} seedB={round1[1].seedB} /></div>
-          <div className="space-y-8 w-full md:w-1/3 md:mt-16"><h4 className="text-xl font-semibold text-cyan-400 text-center">Semifinals</h4><MatchCard match={round2[0]} seedA={round2[0].seedA} seedB={round2[0].seedB} /><MatchCard match={round2[1]} seedA={round2[1].seedA} seedB={round2[1].seedB} /></div>
-          <div className="space-y-4 w-full md:w-1/3 md:mt-32"><h4 className="text-xl font-semibold text-cyan-400 text-center">Finals</h4><MatchCard match={finals[0]} seedA={finals[0].seedA} seedB={finals[0].seedB} /></div>
+          <div className="space-y-4 w-full md:w-1/3"><h4 className="text-xl font-semibold text-yellow-400 text-center">Round 1</h4><MatchCard match={round1[0]} seedA={round1[0].seedA} seedB={round1[0].seedB} /><MatchCard match={round1[1]} seedA={round1[1].seedA} seedB={round1[1].seedB} /></div>
+          <div className="space-y-8 w-full md:w-1/3 md:mt-16"><h4 className="text-xl font-semibold text-yellow-400 text-center">Semifinals</h4><MatchCard match={round2[0]} seedA={round2[0].seedA} seedB={round2[0].seedB} /><MatchCard match={round2[1]} seedA={round2[1].seedA} seedB={round2[1].seedB} /></div>
+          <div className="space-y-4 w-full md:w-1/3 md:mt-32"><h4 className="text-xl font-semibold text-yellow-400 text-center">Finals</h4><MatchCard match={finals[0]} seedA={finals[0].seedA} seedB={finals[0].seedB} /></div>
         </div>
       </CardContent>
     </Card>
@@ -1985,16 +1985,16 @@ const MatchSimScreen = ({ state, dispatch, matchId }) => {
   return (
     <Card>
       <CardHeader className="text-center">
-        <div className="flex justify-around items-center"><span className="text-2xl font-bold">{homeTeam.name}</span><span className="text-4xl font-bold text-cyan-400">{updatedMatch.played ? `${updatedMatch.homeScore} - ${updatedMatch.awayScore}` : 'VS'}</span><span className="text-2xl font-bold">{awayTeam.name}</span></div>
+        <div className="flex justify-around items-center"><span className="text-2xl font-bold">{homeTeam.name}</span><span className="text-4xl font-bold text-yellow-400">{updatedMatch.played ? `${updatedMatch.homeScore} - ${updatedMatch.awayScore}` : 'VS'}</span><span className="text-2xl font-bold">{awayTeam.name}</span></div>
       </CardHeader>
       <CardContent>
-        <div className="h-96 bg-gray-900 rounded-lg p-4 overflow-y-auto mb-4 font-mono text-sm">
-          {log.map((entry, index) => (<p key={index} className={`mb-1 ${entry.text.includes('GOAL') ? 'text-green-400 font-bold' : entry.text.includes('SAVE') ? 'text-yellow-400' : 'text-gray-300'}`}><span className="text-gray-500 mr-2">[{entry.time}]</span>{entry.text}</p>))}
+        <div className="h-96 bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg p-4 overflow-y-auto mb-4 font-mono text-sm">
+          {log.map((entry, index) => (<p key={index} className={`mb-1 ${entry.text.includes('GOAL') ? 'text-green-400 font-bold' : entry.text.includes('SAVE') ? 'text-yellow-400' : 'text-blue-100'}`}><span className="text-blue-300 mr-2">[{entry.time}]</span>{entry.text}</p>))}
         </div>
         <div className="flex justify-between items-center">
           {updatedMatch.played ? (<Button Icon={ArrowRight} label="Back to Home" onClick={() => dispatch({ type: 'NAVIGATE', payload: 'HOME' })} />)
           : (<Button Icon={ChevronsRight} label="Start Simulation" onClick={runSimulation} variant="success" disabled={isSimming} />)}
-          <div className="flex items-center space-x-2 text-white"><label>Speed:</label><button onClick={() => setSimSpeed(1000)} className={`px-2 py-1 rounded ${simSpeed === 1000 ? 'bg-cyan-500' : 'bg-gray-700'}`}>Slow</button><button onClick={() => setSimSpeed(500)} className={`px-2 py-1 rounded ${simSpeed === 500 ? 'bg-cyan-500' : 'bg-gray-700'}`}>Mid</button><button onClick={() => setSimSpeed(100)} className={`px-2 py-1 rounded ${simSpeed === 100 ? 'bg-cyan-500' : 'bg-gray-700'}`}>Fast</button></div>
+          <div className="flex items-center space-x-2 text-white"><label>Speed:</label><button onClick={() => setSimSpeed(1000)} className={`px-2 py-1 rounded ${simSpeed === 1000 ? 'bg-cyan-500' : 'bg-blue-700'}`}>Slow</button><button onClick={() => setSimSpeed(500)} className={`px-2 py-1 rounded ${simSpeed === 500 ? 'bg-cyan-500' : 'bg-blue-700'}`}>Mid</button><button onClick={() => setSimSpeed(100)} className={`px-2 py-1 rounded ${simSpeed === 100 ? 'bg-cyan-500' : 'bg-blue-700'}`}>Fast</button></div>
         </div>
       </CardContent>
     </Card>
@@ -2010,27 +2010,27 @@ const OffSeasonRetirementsModal = ({ state, dispatch }) => {
     const getTeamName = (id) => league.teams.find(t => t.id === id)?.name || 'N/A';
     
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-2xl border border-gray-700 shadow-2xl">
+        <div className="fixed inset-0 bg-blue-950/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-2xl border border-yellow-600/30 shadow-2xl">
             <CardHeader className="text-center"><h2 className="text-3xl font-bold text-white">Player Retirements</h2></CardHeader>
             <CardContent className="max-h-[70vh] overflow-y-auto">
                 {retiringPlayers.length > 0 ? (
                     <ul className="space-y-2">
                         {retiringPlayers.map(player => (
-                            <li key={player.id} className="p-3 bg-gray-700 rounded-lg flex justify-between items-center">
+                            <li key={player.id} className="p-3 bg-blue-700 rounded-lg flex justify-between items-center">
                                 <div>
                                     <span className="font-bold text-white text-lg">{player.name}</span>
-                                    <span className="text-sm text-gray-400 ml-2">({POSITIONS[player.position]} | Age {player.age})</span>
+                                    <span className="text-sm text-blue-200 ml-2">({POSITIONS[player.position]} | Age {player.age})</span>
                                 </div>
-                                <span className="text-gray-300">{getTeamName(player.teamId)}</span>
+                                <span className="text-blue-100">{getTeamName(player.teamId)}</span>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <p className="text-gray-400 text-center">No players retired this season.</p>
+                    <p className="text-blue-200 text-center">No players retired this season.</p>
                 )}
             </CardContent>
-            <div className="p-4 bg-gray-900 text-center">
+            <div className="p-4 bg-gradient-to-br from-blue-900 to-blue-800 text-center">
                 <Button Icon={ChevronsRight} label="Continue to Re-Signing" onClick={() => dispatch({ type: 'ACKNOWLEDGE_RETIREMENTS' })} variant="success" />
             </div>
           </Card>
@@ -2072,7 +2072,7 @@ const OffSeasonReSigning = ({ state, dispatch }) => {
                 <div className="flex justify-between items-center">
                     <h3 className="text-xl font-semibold text-white">Off-Season: Player Re-Signing</h3>
                     <div className="text-right">
-                        <div className="text-sm text-gray-400">Salary Cap</div>
+                        <div className="text-sm text-blue-200">Salary Cap</div>
                         <div className={`text-lg font-bold ${userTeam.salary > game.salaryCap ? 'text-red-500' : 'text-white'}`}>
                             ${(userTeam.salary / 1000).toFixed(1)}k / ${(game.salaryCap / 1000)}k
                         </div>
@@ -2080,33 +2080,33 @@ const OffSeasonReSigning = ({ state, dispatch }) => {
                 </div>
             </CardHeader>
             <CardContent className="space-y-4 max-h-[70vh] overflow-y-auto">
-                {expiringPlayers.length === 0 && <p className="text-gray-400">You have no players with expiring contracts.</p>}
+                {expiringPlayers.length === 0 && <p className="text-blue-200">You have no players with expiring contracts.</p>}
                 {expiringPlayers.map(player => {
                     const expectedSalary = getPlayerExpectedSalary(player);
                     const currentOffer = offers[player.id] || { years: 1, salary: expectedSalary };
                     return (
-                        <div key={player.id} className="p-4 bg-gray-700 rounded-lg grid grid-cols-4 gap-4 items-center">
+                        <div key={player.id} className="p-4 bg-blue-700 rounded-lg grid grid-cols-4 gap-4 items-center">
                             <div>
                                 <p className="font-bold text-white text-lg">{player.name}</p>
-                                <p className="text-sm text-gray-400">{POSITIONS[player.position]} | OVR: {player.overall}</p>
-                                <p className="text-sm text-gray-300">Expects: ~${expectedSalary}</p>
+                                <p className="text-sm text-blue-200">{POSITIONS[player.position]} | OVR: {player.overall}</p>
+                                <p className="text-sm text-blue-100">Expects: ~${expectedSalary}</p>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <label className="text-gray-300">Years:</label>
+                                <label className="text-blue-100">Years:</label>
                                 <input type="number" min="1" max="5" value={currentOffer.years} onChange={e => handleOfferChange(player.id, 'years', e.target.value)}
-                                    className="w-20 bg-gray-900 text-white rounded p-2" />
+                                    className="w-20 bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded p-2" />
                             </div>
                             <div className="flex items-center space-x-2">
-                                <label className="text-gray-300">Salary:</label>
+                                <label className="text-blue-100">Salary:</label>
                                 <input type="number" min="100" step="50" value={currentOffer.salary} onChange={e => handleOfferChange(player.id, 'salary', e.target.value)}
-                                    className="w-24 bg-gray-900 text-white rounded p-2" />
+                                    className="w-24 bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded p-2" />
                             </div>
                             <Button Icon={DollarSign} label="Offer" onClick={() => handleOffer(player.id)} variant="success" />
                         </div>
                     );
                 })}
             </CardContent>
-            <div className="p-4 bg-gray-900 text-center">
+            <div className="p-4 bg-gradient-to-br from-blue-900 to-blue-800 text-center">
                 <Button Icon={ChevronsRight} label="Finish Re-Signing & Enter Free Agency" onClick={() => dispatch({ type: 'FINISH_RE_SIGNING' })} variant="primary" />
             </div>
         </Card>
@@ -2148,7 +2148,7 @@ const OffSeasonFreeAgency = ({ state, dispatch }) => {
                 <div className="flex justify-between items-center">
                     <h3 className="text-xl font-semibold text-white">Off-Season: Free Agency</h3>
                     <div className="text-right">
-                        <div className="text-sm text-gray-400">Cap Space</div>
+                        <div className="text-sm text-blue-200">Cap Space</div>
                         <div className={`text-lg font-bold ${userTeam.salary > game.salaryCap ? 'text-red-500' : 'text-white'}`}>
                             ${(game.salaryCap - userTeam.salary)}
                         </div>
@@ -2156,33 +2156,33 @@ const OffSeasonFreeAgency = ({ state, dispatch }) => {
                 </div>
             </CardHeader>
             <CardContent className="space-y-4 max-h-[70vh] overflow-y-auto">
-                {freeAgents.length === 0 && <p className="text-gray-400">There are no free agents available.</p>}
+                {freeAgents.length === 0 && <p className="text-blue-200">There are no free agents available.</p>}
                 {freeAgents.map(player => {
                     const expectedSalary = getPlayerExpectedSalary(player);
                     const currentOffer = offers[player.id] || { years: 1, salary: expectedSalary };
                     return (
-                        <div key={player.id} className="p-4 bg-gray-700 rounded-lg grid grid-cols-4 gap-4 items-center">
+                        <div key={player.id} className="p-4 bg-blue-700 rounded-lg grid grid-cols-4 gap-4 items-center">
                             <div>
                                 <p className="font-bold text-white text-lg">{player.name}</p>
-                                <p className="text-sm text-gray-400">{POSITIONS[player.position]} | OVR: {player.overall}</p>
-                                <p className="text-sm text-gray-300">Expects: ~${expectedSalary}</p>
+                                <p className="text-sm text-blue-200">{POSITIONS[player.position]} | OVR: {player.overall}</p>
+                                <p className="text-sm text-blue-100">Expects: ~${expectedSalary}</p>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <label className="text-gray-300">Years:</label>
+                                <label className="text-blue-100">Years:</label>
                                 <input type="number" min="1" max="5" value={currentOffer.years} onChange={e => handleOfferChange(player.id, 'years', e.target.value)}
-                                    className="w-20 bg-gray-900 text-white rounded p-2" />
+                                    className="w-20 bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded p-2" />
                             </div>
                             <div className="flex items-center space-x-2">
-                                <label className="text-gray-300">Salary:</label>
+                                <label className="text-blue-100">Salary:</label>
                                 <input type="number" min="100" step="50" value={currentOffer.salary} onChange={e => handleOfferChange(player.id, 'salary', e.target.value)}
-                                    className="w-24 bg-gray-900 text-white rounded p-2" />
+                                    className="w-24 bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded p-2" />
                             </div>
                             <Button Icon={UserPlus} label="Offer" onClick={() => handleOffer(player.id)} variant="success" />
                         </div>
                     );
                 })}
             </CardContent>
-            <div className="p-4 bg-gray-900 text-center">
+            <div className="p-4 bg-gradient-to-br from-blue-900 to-blue-800 text-center">
                 <Button Icon={ChevronsRight} label="Finish Free Agency & Proceed to Draft" onClick={() => dispatch({ type: 'FINISH_FREE_AGENCY' })} variant="primary" />
             </div>
         </Card>
@@ -2203,27 +2203,27 @@ const OffSeasonDraft = ({ state, dispatch }) => {
                 <div className="flex justify-between items-center">
                     <h3 className="text-xl font-semibold text-white">Off-Season: Rookie Draft</h3>
                     <div className="text-right">
-                        <div className="text-sm text-gray-400">Picks Remaining</div>
+                        <div className="text-sm text-blue-200">Picks Remaining</div>
                         <div className="text-lg font-bold text-white">{userDraftPicks}</div>
                     </div>
                 </div>
             </CardHeader>
             <CardContent className="space-y-4 max-h-[70vh] overflow-y-auto">
-                {draftablePlayers.length === 0 && <p className="text-gray-400">The draft class is empty.</p>}
+                {draftablePlayers.length === 0 && <p className="text-blue-200">The draft class is empty.</p>}
                 {draftablePlayers.map(player => {
                     const salary = player.contract.salary;
                     return (
-                        <div key={player.id} className="p-4 bg-gray-700 rounded-lg grid grid-cols-4 gap-4 items-center">
+                        <div key={player.id} className="p-4 bg-blue-700 rounded-lg grid grid-cols-4 gap-4 items-center">
                             <div>
                                 <p className="font-bold text-white text-lg">{player.name}</p>
-                                <p className="text-sm text-gray-400">{POSITIONS[player.position]} | Age: {player.age}</p>
+                                <p className="text-sm text-blue-200">{POSITIONS[player.position]} | Age: {player.age}</p>
                             </div>
                              <div>
-                                <p className="text-sm text-gray-400">Overall</p>
+                                <p className="text-sm text-blue-200">Overall</p>
                                 <p className="font-bold text-white text-lg">{player.overall}</p>
                             </div>
                             <div>
-                                <p className="text-sm text-gray-400">Potential</p>
+                                <p className="text-sm text-blue-200">Potential</p>
                                 <p className="font-bold text-yellow-400 text-lg">{player.potential} / 10</p>
                             </div>
                             <Button Icon={PackagePlus} label={`Draft ($${salary})`} onClick={() => dispatch({ type: 'DRAFT_PLAYER', payload: { playerId: player.id } })} variant="success" disabled={userDraftPicks <= 0} />
@@ -2231,7 +2231,7 @@ const OffSeasonDraft = ({ state, dispatch }) => {
                     );
                 })}
             </CardContent>
-            <div className="p-4 bg-gray-900 text-center">
+            <div className="p-4 bg-gradient-to-br from-blue-900 to-blue-800 text-center">
                 <Button Icon={ChevronsRight} label="Finish Draft & Proceed to Progression" onClick={() => dispatch({ type: 'FINISH_DRAFT' })} variant="primary" />
             </div>
         </Card>
@@ -2251,12 +2251,12 @@ const OffSeasonProgression = ({ state, dispatch }) => {
         <Card>
             <CardHeader><h3 className="text-xl font-semibold text-white">Off-Season: Player Progression</h3></CardHeader>
             <CardContent className="space-y-4 max-h-[70vh] overflow-y-auto">
-                {userProgression.length === 0 && <p className="text-gray-400">No players on your team had significant changes.</p>}
+                {userProgression.length === 0 && <p className="text-blue-200">No players on your team had significant changes.</p>}
                 {userProgression.map(log => {
                     const ovrChange = log.newOvr - log.oldOvr;
                     const ovrColor = ovrChange > 0 ? 'text-green-500' : 'text-red-500';
                     return (
-                        <div key={log.playerId} className="p-4 bg-gray-700 rounded-lg">
+                        <div key={log.playerId} className="p-4 bg-blue-700 rounded-lg">
                             <div className="flex justify-between items-center mb-2">
                                 <p className="font-bold text-white text-lg">{log.name}</p>
                                 <p className={`font-bold text-lg ${ovrColor}`}>
@@ -2267,7 +2267,7 @@ const OffSeasonProgression = ({ state, dispatch }) => {
                                 {log.changes.map(change => {
                                     const changeColor = change.new > change.old ? 'text-green-400' : 'text-red-400';
                                     return (
-                                        <p key={change.stat} className="text-sm text-gray-300">
+                                        <p key={change.stat} className="text-sm text-blue-100">
                                             {change.stat}: {change.old} → <span className={`font-bold ${changeColor}`}>{change.new}</span>
                                         </p>
                                     );
@@ -2277,7 +2277,7 @@ const OffSeasonProgression = ({ state, dispatch }) => {
                     );
                 })}
             </CardContent>
-            <div className="p-4 bg-gray-900 text-center">
+            <div className="p-4 bg-gradient-to-br from-blue-900 to-blue-800 text-center">
                 <Button Icon={ChevronsRight} label="Start New Season" onClick={() => dispatch({ type: 'FINISH_PROGRESSION' })} variant="success" />
             </div>
         </Card>
@@ -2287,13 +2287,13 @@ const OffSeasonProgression = ({ state, dispatch }) => {
 // --- MODAL COMPONENTS ---
 
 const MessageModal = ({ text, onClose }) => (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-      <Card className="w-full max-w-sm border border-cyan-500 shadow-2xl">
+    <div className="fixed inset-0 bg-blue-950/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <Card className="w-full max-w-sm border border-yellow-500 shadow-2xl">
         <CardHeader><h3 className="text-lg font-semibold text-white">Notification</h3></CardHeader>
         <CardContent>
-            <p className="text-gray-300 text-center text-lg">{text}</p>
+            <p className="text-blue-100 text-center text-lg">{text}</p>
         </CardContent>
-        <div className="p-4 bg-gray-900 text-center">
+        <div className="p-4 bg-gradient-to-br from-blue-900 to-blue-800 text-center">
             <Button onClick={onClose} variant="primary">OK</Button>
         </div>
       </Card>
@@ -2366,11 +2366,11 @@ export default function App() {
 
 
   if (isLoading) {
-     return (<div className="bg-gray-950 min-h-screen flex items-center justify-center text-white"><h1 className="text-3xl font-bold animate-pulse">Loading New Game...</h1></div>);
+     return (<div className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 min-h-screen flex items-center justify-center text-white"><h1 className="text-3xl font-bold animate-pulse text-yellow-400 drop-shadow-lg shadow-yellow-500">Loading New Game...</h1></div>);
   }
 
   return (
-    <div className="flex h-screen bg-gray-950 text-gray-200 font-sans">
+    <div className="flex h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-blue-50 font-sans">
       <Sidebar onNav={handleNav} onNewGame={handleNewGame} isExpanded={isSidebarExpanded} currentPage={state.ui.currentPage} />
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         <TopBar userTeam={userTeam} season={state.game.currentSeason} onToggleSidebar={() => setIsSidebarExpanded(prev => !prev)} isExpanded={isSidebarExpanded} />
