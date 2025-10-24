@@ -87,15 +87,15 @@ export default function App() {
 
 
   if (isLoading) {
-    return (<div className="bg-gray-950 min-h-screen flex items-center justify-center text-white"><h1 className="text-3xl font-bold animate-pulse">Loading New Game...</h1></div>);
+    return (<div className="bg-ocean-950 min-h-screen flex items-center justify-center text-white"><h1 className="text-3xl font-header tracking-gaming animate-pulse text-aqua-400">Loading New Game...</h1></div>);
   }
 
   return (
-    <div className="flex h-screen bg-gray-950 text-gray-200 font-sans">
+    <div className="flex h-screen bg-ocean-950 text-gray-100 font-body">
       <Sidebar onNav={handleNav} onNewGame={handleNewGame} isExpanded={isSidebarExpanded} currentPage={state.ui.currentPage} />
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         <TopBar userTeam={userTeam} season={state.game.currentSeason} onToggleSidebar={() => setIsSidebarExpanded(prev => !prev)} isExpanded={isSidebarExpanded} />
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gradient-to-br from-ocean-950 via-ocean-900 to-ocean-950">
           {renderPage()}
         </main>
       </div>
